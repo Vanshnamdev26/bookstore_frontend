@@ -2,7 +2,7 @@ import React from "react";
 
 export const AuthContext = React.createContext();
 export default function AuthProvider({ children }) {
-    const initialAuthUser = sessionStorage.getItem("user");
+    const initialAuthUser = localStorage.getItem("user");
     const [authUser, setAuthUser] = React.useState(
         initialAuthUser ? JSON.parse(initialAuthUser) : null
     );
