@@ -1,10 +1,22 @@
 import React, { useEffect, useState } from "react";
 import Cards from "./Cards";
-import Banner from "./Banner";
+import axios from "axios";
 
 
 function Course() {
   const [book, setBook] = useState([]);
+  useEffect(() => {
+    const getBook = async () => {
+      try {
+        const res = await axios.get("http://localhost:4001/book");
+        console.log(res.data);
+        setBook(res.data);
+      } catch (error) {
+        console.log("Error fetching book data:", error);
+      }
+    }
+    getBook();
+  }, []);
 
   return (
     <div className="mt-10">

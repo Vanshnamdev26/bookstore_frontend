@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthProvider.jsx";
+import Logout from "./Logout.jsx";
 
 
 function Navbar() {
 
    const [sticky, setSticky] = useState(false);
+   const [authUser, setAuthUser] = useAuth();
 
   useEffect(() => {
     const handleScroll = () => setSticky(window.scrollY > 0);
@@ -70,14 +73,17 @@ function Navbar() {
             </div>
           </div>
 
-          {/* Auth */}
           <div className="flex items-center gap-4 ml-6">
-            <Link
-              to="/login"
-              className="bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-pink-600 transition duration-300"
-            >
-              Login
-            </Link>
+            {authUser ? (
+              <Logout />
+            ) : (
+              <Link
+                to="/login"
+                className="bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-pink-600 transition duration-300"
+              >
+                Login
+              </Link>
+            )}
           </div>
 
         </div>

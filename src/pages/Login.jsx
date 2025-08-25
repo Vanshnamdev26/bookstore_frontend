@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Navbar from "../components/Navbar";
+import axios from "axios";
 
 function Login() {
   const {
@@ -12,6 +13,22 @@ function Login() {
   } = useForm();
 
   const onSubmit = async (data) => {
+    const userInfo = {
+      email: data.email,
+      password: data.password,
+    };
+    await axios.post("http://localhost:4001/user/login", userInfo)
+    .then((res)=>{
+      console.log("User Login successfully", res.data);
+      if(res.data){
+        toast.success("Login successful!");
+        localStorage.setItem("user", JSON.stringify(res.data));
+        window.location.href = "/";
+      }
+    }).catch((error) => {
+      console.log("Login error:", error);
+      toast.error("Error: " + error.response.data.message);
+    });
   };
 
   return (

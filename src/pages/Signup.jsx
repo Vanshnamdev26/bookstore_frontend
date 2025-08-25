@@ -1,15 +1,11 @@
 import React from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import Navbar from "../components/Navbar";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 function Signup() {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
-
   const {
     register,
     handleSubmit,
@@ -17,8 +13,24 @@ function Signup() {
   } = useForm();
 
   const onSubmit = async (data) => {
-  
-};
+    const userInfo = {
+      fullname: data.fullname,
+      email: data.email,
+      password: data.password,
+    };
+    await axios.post("http://localhost:4001/user/signup", userInfo)
+    .then((res)=>{
+      console.log("User Signup successfully", res.data);
+      if(res.data){
+        toast.success("Signup successful!");
+        window.location.href = "/";
+      }
+      localStorage.setItem("user", JSON.stringify(res.data));
+    }).catch((error) => {
+      console.log("Signup error:", error);
+      toast.error("Error: " + error.response.data.message);
+    });
+  };
 
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-r from-pink-50 via-white to-blue-50">
