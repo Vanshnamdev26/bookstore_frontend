@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Cards from "./Cards";
+import Banner from "./Banner";
 import axios from "axios";
 
 
