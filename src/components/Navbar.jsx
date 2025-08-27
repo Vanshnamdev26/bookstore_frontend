@@ -3,11 +3,10 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider.jsx";
 import Logout from "./Logout.jsx";
 
-
 function Navbar() {
-
-   const [sticky, setSticky] = useState(false);
-   const [authUser, setAuthUser] = useAuth();
+  const [sticky, setSticky] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [authUser, setAuthUser] = useAuth();
 
   useEffect(() => {
     const handleScroll = () => setSticky(window.scrollY > 0);
@@ -18,16 +17,31 @@ function Navbar() {
   const navItems = (
     <>
       <li>
-        <Link to="/" className="hover:text-pink-500 transition-colors duration-200">Home</Link>
+        <Link
+          to="/"
+          className="hover:text-pink-500 transition-colors duration-200"
+        >
+          Home
+        </Link>
       </li>
       <li>
-        <Link to="/course" className="hover:text-pink-500 transition-colors duration-200">Course</Link>
+        <Link to="/books" className="hover:text-pink-500 transition-colors duration-200">Books</Link>
       </li>
       <li>
-        <Link to="/contact" className="hover:text-pink-500 transition-colors duration-200">Contact</Link>
+        <Link
+          to="/contact"
+          className="hover:text-pink-500 transition-colors duration-200"
+        >
+          Contact
+        </Link>
       </li>
       <li>
-        <Link to="/about" className="hover:text-pink-500 transition-colors duration-200">About</Link>
+        <Link
+          to="/about"
+          className="hover:text-pink-500 transition-colors duration-200"
+        >
+          About
+        </Link>
       </li>
     </>
   );
@@ -43,11 +57,14 @@ function Navbar() {
       >
         <div className="max-w-screen-2xl mx-auto flex items-center justify-between px-6 py-4">
           {/* Logo */}
-          <Link to="/" className="text-2xl font-bold text-pink-500 cursor-pointer">
+          <Link
+            to="/"
+            className="text-2xl font-bold text-pink-500 cursor-pointer"
+          >
             bookStore
           </Link>
 
-          {/* Nav Links + Search (Desktop) */}
+          {/* Desktop Nav */}
           <div className="hidden lg:flex items-center gap-8 ml-auto">
             <ul className="flex gap-6 font-medium">{navItems}</ul>
 
@@ -73,35 +90,49 @@ function Navbar() {
             </div>
           </div>
 
+          {/* Right Side (Login / Logout + Mobile Menu Btn) */}
           <div className="flex items-center gap-4 ml-6">
             {authUser ? (
               <Logout />
             ) : (
               <Link
                 to="/login"
-                className="bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-pink-600 transition duration-300"
+                className="hidden lg:block bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-pink-600 transition duration-300"
               >
                 Login
               </Link>
             )}
+
+            {/* Mobile Menu Button */}
+            <button
+              className="lg:hidden p-2 rounded-md border"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              ☰
+            </button>
           </div>
-
         </div>
-      </div>
 
-      {/* Mobile Menu */}
-      <div className="lg:hidden">
-        <div className="dropdown absolute top-4 left-4">
-          <button tabIndex={0} className="btn btn-ghost">
-            ☰
-          </button>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-white dark:bg-slate-800 rounded-box w-52"
-          >
-            {navItems}
-          </ul>
-        </div>
+        {/* Mobile Dropdown */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden bg-white dark:bg-slate-800 shadow-md">
+            <ul className="flex flex-col gap-4 p-4 font-medium border-t">
+              {navItems}
+              <li>
+                {authUser ? (
+                  <Logout />
+                ) : (
+                  <Link
+                    to="/login"
+                    className="block bg-pink-500 text-white text-center px-4 py-2 rounded-md hover:bg-pink-600 transition duration-300"
+                  >
+                    Login
+                  </Link>
+                )}
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
     </>
   );

@@ -4,7 +4,7 @@ import Banner from "./Banner";
 import axios from "axios";
 
 
-function Course() {
+function Book() {
   const [book, setBook] = useState([]);
   useEffect(() => {
     const getBook = async () => {
@@ -28,7 +28,7 @@ function Course() {
           <span className="text-pink-500">Here! 🙂</span>
         </h2>
         <p className="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mt-4 leading-relaxed">
-          Browse through our collection of exciting courses and start your
+          Browse through our collection of exciting books and start your
           learning journey today!
         </p>
       </div>
@@ -43,4 +43,4 @@ function Course() {
   );
 }
 
-export default Course;
+export default Book;

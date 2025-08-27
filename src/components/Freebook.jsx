@@ -21,7 +21,7 @@ function Freebook() {
     <div className="max-w-screen-2xl container mx-auto md:px-20 px-6 py-12">
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {book.filter((item) => item.category === "Free").map((item) => (
-          <Cards key={item.id} item={item} />
+          <Cards key={item._id} item={item} />
         ))}
       </div>
     </div>

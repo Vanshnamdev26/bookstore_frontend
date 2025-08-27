@@ -1,13 +1,14 @@
 import React from "react";
 import Home from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
-import Courses from "./pages/Courses";
+import Books from "./pages/Books.jsx";
 import Signup from "./pages/Signup";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import { Toaster } from "react-hot-toast";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "./context/AuthProvider.jsx";
+import CreateBook from "./pages/CreateBook.jsx";
 
 function App() {
   const [authUser, setAuthUser] = useAuth();
@@ -18,9 +19,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/course" element={authUser ? <Courses /> : <Navigate to="/login" />} />
+        <Route path="/books" element={authUser ? <Books /> : <Navigate to="/login" />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/create-book" element={<CreateBook />} />
       </Routes>
 
       {/* Global Toaster for Notifications */}

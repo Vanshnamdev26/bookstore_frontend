@@ -1,5 +1,5 @@
 import React from "react";
-import banner from "../../public/Banner.png";
+import Books from "../../public/Books.png";
 
 function Banner() {
   return (
@@ -19,7 +19,7 @@ function Banner() {
           </p>
 
           {/* Email Input */}
-          <div className="flex items-center border rounded-lg overflow-hidden max-w-md">
+          <div className="flex items-center border rounded-lg overflow-hidden max-w-md shadow-sm">
             <input
               type="text"
               className="flex-1 px-4 py-2 outline-none"
@@ -29,18 +29,18 @@ function Banner() {
               Subscribe
             </button>
           </div>
-
-          <button className="mt-6 px-6 py-3 rounded-lg font-semibold text-white bg-gradient-to-r from-pink-500 to-blue-500 shadow-md hover:opacity-90 transition">
-  Get Started
-</button>
         </div>
       </div>
 
       {/* Right Banner Image */}
-      <div className="w-full md:w-1/2 order-1 md:order-2 flex justify-center">
+      <div className="w-full md:w-1/2 order-1 md:order-2 flex justify-center relative">
+        {/* Background Circle */}
+        <div className="absolute w-72 h-72 md:w-96 md:h-96 bg-gradient-to-r from-pink-200 via-pink-100 to-blue-200 rounded-full blur-2xl opacity-70 animate-pulse"></div>
+
+        {/* Image */}
         <img
-          src={banner}
-          className="w-[300px] h-[250px] md:w-[550px] md:h-[460px] object-contain"
+          src={Books}
+          className="relative w-[320px] h-[260px] md:w-[550px] md:h-[460px] object-cover rounded-2xl shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl animate-float"
           alt="Learning Banner"
         />
       </div>
